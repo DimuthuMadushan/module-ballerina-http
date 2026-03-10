@@ -276,9 +276,11 @@ function testInvalidConfigMaxAge() returns error? {
     Process result = check exec(bal_exec_path, {BAL_CONFIG_FILES: configFile}, (), "run", string `${temp_dir_path}/service`);
     int _ = check result.waitForExit();
     int exitCode = check result.exitCode();
+    log:printInfo("Process exited with code: " + exitCode.toString());
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, "UTF-8");
     string outText = check sc.read(100000);
+    log:printInfo("Error output: " + outText);
     string[] logLines = re `\n`.split(outText.trim());
     if logLines.length() > 5 {
         log:printInfo("Error message: " + logLines[5]);
@@ -300,9 +302,11 @@ function testInvalidConfigMaxFileSize() returns error? {
     Process result = check exec(bal_exec_path, {BAL_CONFIG_FILES: configFile}, (), "run", string `${temp_dir_path}/service`);
     int _ = check result.waitForExit();
     int exitCode = check result.exitCode();
+    log:printInfo("Process exited with code: " + exitCode.toString());
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, "UTF-8");
     string outText = check sc.read(100000);
+    log:printInfo("Error output: " + outText);
     string[] logLines = re `\n`.split(outText.trim());
     if logLines.length() > 5 {
         log:printInfo("Error message: " + logLines[5]);
@@ -324,10 +328,12 @@ function testInvalidFilePath() returns error? {
     Process result = check exec(bal_exec_path, {BAL_CONFIG_FILES: configFile}, (), "run", string `${temp_dir_path}/service`);
     int _ = check result.waitForExit();
     int exitCode = check result.exitCode();
+    log:printInfo("Process exited with code: " + exitCode.toString());
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, "UTF-8");
     string outText = check sc.read(100000);
     string[] logLines = re `\n`.split(outText.trim());
+    log:printInfo("Error output: " + outText);
     if logLines.length() > 5 {
         log:printInfo("Error message: " + logLines[5]);
     }
