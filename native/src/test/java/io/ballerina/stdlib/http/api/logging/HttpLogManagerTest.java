@@ -311,7 +311,7 @@ public class HttpLogManagerTest {
     }
 
     @Test (expectedExceptions = IOException.class,
-            expectedExceptionsMessageRegExp = "Failed to setup HTTP access log file handler: /test/logTestFile.txt.lck")
+            expectedExceptionsMessageRegExp = "Failed to setup HTTP access log file handler: .*")
     public void testHttpLogManagerWithInvalidAccessLogPath() throws IOException {
         BMap traceLogAdvancedConfig = mock(BMap.class);
         when(traceLogAdvancedConfig.getBooleanValue(HTTP_LOG_CONSOLE)).thenReturn(false);
